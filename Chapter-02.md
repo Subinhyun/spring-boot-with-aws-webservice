@@ -32,7 +32,7 @@ Application 클래스 : 메인 클래스
 
 </br>
 
-```
+```java
 @RestController
 public class HelloController {
     @GetMapping("/hello")
@@ -82,7 +82,7 @@ mvc.perform(get("/hello"))
 
 </br>
 
-```
+```java
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = HelloController.class)
 public class HelloControllerTest {
@@ -152,7 +152,7 @@ Hello Controller 코드를 롬복으로 전환
 - final이 없는 필드는 생성자에 포함되지 않음
 
 
-```
+```java
 @Getter
 @RequiredArgsConstructor
 public class HelloResponseDto {
@@ -176,7 +176,7 @@ isEqualTo
 - assertj의 동등 비교 메소드
 - assertThat에 있는 값과 isEqualTo의 값을 비교해서 같을 때만 성공
 
-```
+```java
 public class HelloResponseDtoTest {
     @Test
     public void LombokTest() {
@@ -203,7 +203,7 @@ assertj의 장점
 @RequestParam
 - 외부에서 API로 넘긴 파라미터를 가져오는 어노테이션
 
-```
+```java
 @GetMapping("/hello/dto")
 public HelloResponseDto helloResponseDto(
         @RequestParam("name") String name,
@@ -228,7 +228,7 @@ jsonPath
 - $를 기준으로 필드명 명시
 
 
-```
+```java
 @Test
 public void helloDtoReturn() throws Exception{
     String name = "hello";

@@ -64,7 +64,7 @@ h2
 
 </br>
 
-```
+```java
 @Getter
 @NoArgsConstructor
 @Entity
@@ -145,7 +145,7 @@ JpaRepository<Entity 클래스, PK 타입>를 상속하면 기본적인 CRUD 메
 
 ### Spring Data JPA 테스트 코드 작성하기
 
-```
+```java
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PostsRepositoryTest {
@@ -248,7 +248,7 @@ Spring 웹 계층
 
 PostsApiController
 
-```
+```java
 @RequiredArgsConstructor
 @RestController
 public class PostsApiController {
@@ -263,7 +263,7 @@ public class PostsApiController {
 
 PostsService
 
-```
+```java
 @RequiredArgsConstructor
 @Service
 public class PostsService {
@@ -285,7 +285,7 @@ Spring에서 Bean을 주입 받는 방식
 
 PostsSaveRequestsDto
 
-```
+```java
 @Getter
 @NoArgsConstructor
 public class PostsSaveRequestsDto {
@@ -312,7 +312,7 @@ public class PostsSaveRequestsDto {
 
 PostsApiControllerTest
 
-```
+```java
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PostsApiControllerTest {
@@ -358,7 +358,7 @@ public class PostsApiControllerTest {
 
 PostApiController에 추가
 
-```
+```java
 @PutMapping("/api/v1/posts/{id}")
 public Long update(@PathVariable Long id, @RequestBody PostsSaveRequestsDto requestsDto) {
     return postsService.update(id, requestsDto);
@@ -372,7 +372,7 @@ public PostsResponseDto findById(@PathVariable Long id) {
 
 PostResponseDto
 
-```
+```java
 @Getter
 public class PostsResponseDto {
     private Long id;
@@ -391,7 +391,7 @@ public class PostsResponseDto {
 
 PostsUpdateRequestDto
 
-```
+```java
 @Getter
 @NoArgsConstructor
 public class PostsUpdateRequestDto {
@@ -408,7 +408,7 @@ public class PostsUpdateRequestDto {
 
 Posts
 
-```
+```java
 public void update(String title, String content) {
     this.title = title;
     this.content = content;
@@ -417,7 +417,7 @@ public void update(String title, String content) {
 
 PostsService
 
-```
+```java
 @Transactional
 public Long update(Long id, PostsSaveRequestsDto requestsDto) {
     Posts posts = postRepository.findById(id)
@@ -441,7 +441,7 @@ JPA의 핵심 내용은 엔티티가 영속성 컨텍스트에 포함되어 있�
 
 PostsApiControllerTest
 
-```
+```java
 @Test
 public void postUpdate() throws Exception {
     Posts savedPosts = postsRepository.save(Posts.builder()
@@ -485,7 +485,7 @@ public void postUpdate() throws Exception {
 
 BaseTimeEntity
 
-```
+```java
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -525,7 +525,7 @@ Application에 어노테이션 추가
 
 PostsRepositoryTest에 추가
 
-```
+```java
 @Test
 public void BaseTimeEntitySave() {
     LocalDateTime now = LocalDateTime.of(2019,6,4,0,0,0);
