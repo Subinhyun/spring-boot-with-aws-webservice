@@ -413,3 +413,8 @@ Model
 - 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장할 수 있음
 - postsService.findAllDesc()로 가져온 결과를 posts로 index.mustache에 전달
 
+</br>
+
+<img width="1428" alt="스크린샷 2022-07-08 오후 5 11 32" src="https://user-images.githubusercontent.com/48265714/177947958-eb5bfc87-b282-4e95-8e0a-e8eb8837482d.png">
+
+!* 최종수정일 오류로 일단 제외하고 진행!
