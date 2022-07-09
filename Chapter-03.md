@@ -360,7 +360,7 @@ PostApiController에 추가
 
 ```java
 @PutMapping("/api/v1/posts/{id}")
-public Long update(@PathVariable Long id, @RequestBody PostsSaveRequestsDto requestsDto) {
+public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestsDto requestsDto) {
     return postsService.update(id, requestsDto);
 }
 
@@ -419,7 +419,7 @@ PostsService
 
 ```java
 @Transactional
-public Long update(Long id, PostsSaveRequestsDto requestsDto) {
+public Long update(Long id, PostsUpdateRequestsDto requestsDto) {
     Posts posts = postRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
     posts.update(requestsDto.getTitle(), requestsDto.getContent());
