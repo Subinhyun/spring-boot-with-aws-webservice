@@ -267,11 +267,11 @@ PostsService
 @RequiredArgsConstructor
 @Service
 public class PostsService {
-    private final PostRepository postRepository;
+    private final PostsRepository postsRepository;
     
     @Transactional
     public Long save(PostsSaveRequestsDto requestsDto) {
-        return postRepository.save(requestsDto.toEntity()).getId();
+        return postsRepository.save(requestsDto.toEntity()).getId();
     }
 }
 ```
@@ -420,7 +420,7 @@ PostsService
 ```java
 @Transactional
 public Long update(Long id, PostsUpdateRequestsDto requestsDto) {
-    Posts posts = postRepository.findById(id)
+    Posts posts = postsRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
     posts.update(requestsDto.getTitle(), requestsDto.getContent());
     return id;
@@ -428,7 +428,7 @@ public Long update(Long id, PostsUpdateRequestsDto requestsDto) {
 
 @Transactional
 public PostsResponseDto findById(Long id) {
-    Posts entity = postRepository.findById(id)
+    Posts entity = postsRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
     return new PostsResponseDto(entity);
 }
