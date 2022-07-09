@@ -538,7 +538,7 @@ url: '/api/v1/posts/'+id
   	{{#posts}}
   		<tr>
              <td>{{id}}</td>
-             <td><a href="/posts/update/{{id}}">{{title}}</a></td>	// {1}
+             <td><a href="/posts/update/{{id}}">{{title}}</a></td>
              <td>{{author}}</td>
              <td>{{modifiedDate}}</td>
            </tr>
@@ -570,4 +570,93 @@ IndexController에 추가
 </br>
 
 ---
+
+### 게시글 삭제
+
+</br>
+
+posts-update.mustache
+
+```html 
+<div class="col-md-12">
+      <div class="col-md-4">
+  		...
+          <a href="/" role="button" class="btn btn-secondary">취소</a>
+          <button type="button" class="btn btn-primary" 
+          	id="btn-update">수정 완료</button>
+          <button type="button" class="btn btn-danger" 
+          	id="btn-delete">삭제</button>
+      </div>
+  </div>
+```
+
+
+btn-delete
+- 삭제 버튼을 수정 완료 버튼 옆에 추가
+- 해당 버튼 클릭시 JS에서 이벤트를 수신
+
+</br>
+
+index.js
+```js
+var main = {
+      init : function () {
+      	...
+  
+          $('#btn-delete').on('click', function () {
+              _this.delete();
+          })
+      },
+      ...
+      delete : function () {
+          var id = $('#id').val();
+  
+          $.ajax({
+              type: 'DELETE',
+              url: '/api/v1/posts/'+id,
+              dataType: 'json',
+              contentType: 'application/json; charset=utf-8'
+          }).done(function() {
+              alert('글이 삭제되었습니다.');
+              window.location.href = '/';
+          }).fail(function (error) {
+              alert(JSON.stringify(error));
+          });
+      }
+  };
+  
+  main.init();
+```
+
+</br>
+
+PostsService
+```java
+@Transactional
+      public void delete (Long id) {
+          Posts posts = postsRepository.findById(id).orElseThrow(() ->
+                  new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+  
+          postsRepository.delete(posts);
+      }
+```
+
+postsRepository.delete(posts)
+- JpaRepository에서 이미 delete 메소드를 지원하고 있으니 활용
+- 엔티티를 파라미터로 삭제할 수도 있고, deleteByld 메소드를 활용하면 id로 삭제할 수도 있음
+- 존재하는 Posts인지 확인을 위해 엔티티 조회 후 그대로 삭제
+
+</br>
+
+PostsApiController 
+
+```java
+
+```
+
+</br>
+
+<img width="445" alt="스크린샷 2022-07-09 오후 10 54 44" src="https://user-images.githubusercontent.com/48265714/178108859-a615b684-b969-475a-b322-5ba9a85620e1.png">
+
+<img width="1440" alt="스크린샷 2022-07-09 오후 10 54 51" src="https://user-images.githubusercontent.com/48265714/178108856-73e349d2-0e4c-459d-9372-1b1b27fb62a4.png">
 
