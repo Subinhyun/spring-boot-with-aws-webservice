@@ -29,11 +29,11 @@
             </thead>
             <tbody id="tbody">
             {{#posts}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{title}}</td>
-                <td>{{author}}</td>
-            </tr>
+                <tr>
+                    <td>{{id}}</td>
+                    <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                    <td>{{author}}</td>
+                </tr>
             {{/posts}}
             </tbody>
         </table>
